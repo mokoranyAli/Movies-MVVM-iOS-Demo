@@ -9,7 +9,15 @@
 import Foundation
 
 
+public enum PopularMoviesSortType : String{
+    case popularity = "popularity.desc"
+    case voteAverage = "vote_average.desc"
+    case releaseDate = "release_date.desc"
+}
+
 class Constants {
-    static let API_Key = "f9fff5cdf61663858e62cf2282fbf0f2"
+    
+    
+    static let API_Key = "7a312711d0d45c9da658b9206f3851dd"
     private init(){}
 }

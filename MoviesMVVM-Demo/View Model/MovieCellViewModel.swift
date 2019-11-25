@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+struct MovieCellViewModel {
+    let movieName: String
+    let MovieRate: String
+    let MovieImageUrl: String
+    let MovieYear: String
+}
