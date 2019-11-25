@@ -1,0 +1,6 @@
+framework module Pods_MoviesMVVM_Demo_MoviesMVVM_DemoUITests {
+  umbrella header "Pods-MoviesMVVM-Demo-MoviesMVVM-DemoUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

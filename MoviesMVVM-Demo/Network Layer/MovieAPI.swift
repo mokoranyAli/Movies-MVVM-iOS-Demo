@@ -30,7 +30,7 @@ extension MovieApi {
     
     var sampleData: Data {
         
-        return Data()
+        //return Data()
         switch self {
         case .recommend : return stubbedResponse("Recommended")
         case .popular  : return stubbedResponse("Popular")
