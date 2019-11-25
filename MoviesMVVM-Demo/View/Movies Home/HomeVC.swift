@@ -14,9 +14,10 @@ class HomeVC: UIViewController {
     
     
     
-    lazy var viewModel: MovieViewModel = {
-        return MovieViewModel()
-    }()
+//    lazy var viewModel: MovieViewModel = {
+//        return MovieViewModel()
+//    }()
+     var viewModel:MovieViewModel!
     
    
     override func viewDidLoad() {
@@ -37,7 +38,7 @@ class HomeVC: UIViewController {
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        if Connectivity.isConnectedToInternet() {
-//            
+//
 //            showAlert("Check Your Internet....")
 //        }
 //    }

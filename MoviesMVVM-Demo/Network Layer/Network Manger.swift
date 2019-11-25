@@ -10,19 +10,19 @@ import Foundation
 import Moya
 import SwiftyJSON
 
-//protocol Networkable {
-//
-//    //var provider: MoyaProvider<MovieApi> { get }
-//
-//    func getNewMovies(page: Int, sortType: PopularMoviesSortType, completion: @escaping ([Movie]?, Swift.Error?) -> ())
-//}
+protocol Networkable {
 
-class NetworkManger{
-public static let shared = NetworkManger()
+    //var provider: MoyaProvider<MovieApi> { get }
+
+    func getNewMovies(page: Int, sortType: PopularMoviesSortType, completion: @escaping ([Movie]?, Swift.Error?) -> ())
+}
+
+struct NetworkManger:Networkable{
+//public static let shared = NetworkManger()
  static let environment: NetworkEnvironment = .staging
-private init() {}
+//private init() {}
 
-private let provider = MoyaProvider<MovieApi>()
+fileprivate let provider = MoyaProvider<MovieApi>()
     
     
     

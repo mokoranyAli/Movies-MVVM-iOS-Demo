@@ -10,7 +10,13 @@ import Foundation
 
 class MovieViewModel {
     
-    let API_Service = NetworkManger.shared
+    var API_Service : Networkable!
+    
+    init(ApiService:Networkable) {
+        self.API_Service = ApiService
+    }
+    
+    
     private var movies:[Movie]=[Movie]()
     
     private var cellViewModels: [MovieCellViewModel] = [MovieCellViewModel]() {
