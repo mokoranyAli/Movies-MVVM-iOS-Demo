@@ -32,14 +32,14 @@ class HomeVC: UIViewController {
         print("sss")
         tableView.rowHeight = 200
         //tableView.rowHeight = UITableView.automaticDimension
-        setupBindings()
-        setupBinding()
+        setupBindingsViewModel()
+        setupBindingTabelView()
         viewModel.initFetch()
         
         
             
     }
-    fileprivate func setupBindings() {
+    fileprivate func setupBindingsViewModel() {
                
         print("s")
                // binding loading to vc
@@ -93,7 +93,7 @@ class HomeVC: UIViewController {
              
 
 
-    private func setupBinding(){
+    private func setupBindingTabelView(){
         
         tableView.rx.modelSelected(Movie.self).subscribe(onNext:{ [weak self] model in
             
