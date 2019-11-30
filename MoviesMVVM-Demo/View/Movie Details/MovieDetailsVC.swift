@@ -14,13 +14,16 @@ class MovieDetailsVC: UIViewController {
     
     var movie:Movie!
     
+    
     @IBOutlet weak var movieImage: UIImageView!
+   
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+ let url = URL.getTMDBImage(type: .poster(path: movie.posterPath , size: .original))
         // Do any additional setup after loading the view.
+        self.movieImage.loadImage(fromURL: url)
         print(movie.title)
         print(movie.id)
 

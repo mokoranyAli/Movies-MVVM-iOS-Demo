@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SDWebImage
+//import SDWebImage
 
 class MovieCell: UITableViewCell {
     
@@ -22,6 +22,7 @@ class MovieCell: UITableViewCell {
         didSet {
             self.movieImageView.clipsToBounds = true
             self.movieImageView.layer.cornerRadius = 3
+//            self.movieImageView.sd_addActivityIndicator()
             let url = URL.getTMDBImage(type: .poster(path: cellMovie.posterPath , size: .original))
             self.movieImageView.loadImage(fromURL: url)
             self.nameLabel.text = cellMovie.title

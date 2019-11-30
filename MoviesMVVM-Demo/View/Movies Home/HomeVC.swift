@@ -95,12 +95,29 @@ class HomeVC: UIViewController {
 
     private func setupBinding(){
         
-       
+        tableView.rx.modelSelected(Movie.self).subscribe(onNext:{ [weak self] model in
+            
+            guard let strongSelf = self else {return}
+           let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let movieDetailsVC  = storyBoard.instantiateViewController(withIdentifier: "movieDetailsVC") as! MovieDetailsVC
+            movieDetailsVC.movie = model
+            strongSelf.navigationController?.pushViewController(movieDetailsVC, animated: true)
+            
+        })
+        
+//       Observable
+//        .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Movie.self))
+//        .bind { [unowned self] indexPath, model in
+//            self.tableView.deselectRow(at: indexPath, animated: true)
+//            print("Selected " + model.title + " at \(indexPath)")
+//        }
+//        .disposed(by: disposeBag)
         
         movies.bind(to: tableView.rx.items(cellIdentifier: "MovieCell", cellType: MovieCell.self)) {  (row,movie,cell) in
             cell.cellMovie = movie
             
-            print(cell.cellMovie.title)
+           //
+           // print(row)
             }.disposed(by: disposeBag)
     
         
