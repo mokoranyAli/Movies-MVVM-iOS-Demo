@@ -17,20 +17,31 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     
-    var movieCellViewModel : MovieCellViewModel? {
-           didSet {
-
-            
-           // print(movieCellViewModel?.movieName)
-            nameLabel.text = movieCellViewModel?.movieName
-            rateLabel.text = movieCellViewModel?.MovieRate
-            yearLabel.text = movieCellViewModel?.MovieYear
-            movieImageView.sd_setImage(with: URL.getTMDBImage(type: .poster(path: movieCellViewModel!.MovieImageUrl , size: .original)) , completed: nil)
-            
-           }
+    
+    public var cellMovie : Movie! {
+        didSet {
+            self.movieImageView.clipsToBounds = true
+            self.movieImageView.layer.cornerRadius = 3
+            let url = URL.getTMDBImage(type: .poster(path: cellMovie.posterPath , size: .original))
+            self.movieImageView.loadImage(fromURL: url)
+            self.nameLabel.text = cellMovie.title
+            self.rateLabel.text = String(cellMovie.rating)
+            self.yearLabel.text = cellMovie.releaseDate
+        }
+    }
+    
+//    var movieCellViewModel : MovieCellViewModel? {
+//           didSet {
+//
+//
+//           // print(movieCellViewModel?.movieName)
+//
+//            movieImageView.sd_setImage(with: URL.getTMDBImage(type: .poster(path: movieCellViewModel!.MovieImageUrl , size: .original)) , completed: nil)
+//
+//           }
     
     
 
     
 }
-}
+

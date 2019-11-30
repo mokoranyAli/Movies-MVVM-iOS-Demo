@@ -41,28 +41,3 @@ enum ImageAPI {
     case profile(path: String, size: ProfileSize)
 }
 
-extension URL {
-    
-    static func getTMDBImage(type: ImageAPI) -> URL {
-        
-        let baseURL: String = "https://image.tmdb.org/t/p/"
-        
-        var url: String!
-        
-        switch type {
-        case .logo(let path, let size):
-            url = baseURL + size.rawValue + path
-        case .poster(let path, let size):
-            url = baseURL + size.rawValue + path
-        case .profile(let path, let size):
-            url = baseURL + size.rawValue + path
-        }
-        
-        guard let finalURL = URL(string: url) else {
-            fatalError("Unable to create image url")
-        }
-        
-        return finalURL
-    }
-    
-}

@@ -20,4 +20,7 @@ pod 'SwiftyJSON'
 pod 'Moya'
 pod 'SVProgressHUD', '~> 1.1.2'
 pod 'SDWebImage'
+pod 'RxSwift'
+pod 'RxCocoa'
+
 end

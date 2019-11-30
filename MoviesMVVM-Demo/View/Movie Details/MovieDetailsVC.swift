@@ -5,7 +5,7 @@
 //  Created by Mohamed Korany Ali on 11/25/19.
 //  Copyright © 2019 Mohamed Korany Ali. All rights reserved.
 //
-
+import Foundation
 import UIKit
 import SDWebImage
 
@@ -23,7 +23,7 @@ class MovieDetailsVC: UIViewController {
         // Do any additional setup after loading the view.
         print(movie.title)
         print(movie.id)
-        movieImage.sd_setImage(with: URL.getTMDBImage(type: .poster(path: movie.posterPath , size: .original)) , completed: nil)
+
     }
     
 

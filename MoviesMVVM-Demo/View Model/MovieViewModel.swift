@@ -6,9 +6,24 @@
 //  Copyright © 2019 Mohamed Korany Ali. All rights reserved.
 //
 
+import RxSwift
 import Foundation
 
 class MovieViewModel {
+    
+   
+    
+    public enum HomeError {
+        case internetError(String)
+        case serverMessage(String)
+        
+    }
+    
+       public let movies : PublishSubject<[Movie]> = PublishSubject()
+       public let loading: PublishSubject<Bool> = PublishSubject()
+       public let error : PublishSubject<HomeError> = PublishSubject()
+       private let disposable = DisposeBag()
+
     
     var API_Service : Networkable!
     
@@ -17,99 +32,35 @@ class MovieViewModel {
     }
     
     
-    private var movies:[Movie]=[Movie]()
-    
-    private var cellViewModels: [MovieCellViewModel] = [MovieCellViewModel]() {
-        didSet {
-            self.reloadTableViewClosure?()
-        }
-    }
-    
-    
-    var reloadTableViewClosure: (()->())?
-    var showAlertClosure: (()->())?
-    var updateLoadingStatus: (()->())?
-    
-    // callback for interfaces
-    var state: State = .empty {
-        didSet {
-            self.updateLoadingStatus?()
-        }
-    }
-    
-    var alertMessage: String? {
-        didSet {
-            self.showAlertClosure?()
-        }
-    }
-    
-    var numberOfCells: Int {
-        return cellViewModels.count
-    }
-    
-    var isAllowSegue: Bool = false
-    var selectedMovie: Movie?
-    
     func initFetch() {
-        state = .loading
+        
         
         
         API_Service.getNewMovies(page: 1, sortType: .popularity) { [weak self] (movies, error) in
+            
+            
+            
             guard let self = self else {
                 return
             }
             
+            self.loading.onNext(false)
+            
             guard error == nil else {
-                self.state = .error
-                self.alertMessage  = error.debugDescription
-                print(error.debugDescription)
+
+                self.error.onNext(.internetError("Check your Internet connection."))
                 return
             }
             print(movies?.count)
-            self.processFetchedPhoto(movies: movies!)
-            self.state = .populated
+            self.movies.onNext(movies!)
+            
             
         }
         
         
     }
     
-    func getCellViewModel( at indexPath: IndexPath ) -> MovieCellViewModel {
-        return cellViewModels[indexPath.row]
-    }
-    
-    func createCellViewModel( movie: Movie ) -> MovieCellViewModel {
-        
-        //Wrap a description
-        
-        return MovieCellViewModel(movieName: movie.title, MovieRate: String(movie.rating), MovieImageUrl: movie.posterPath, MovieYear: movie.releaseDate)
-        
-    }
-    
-    private func processFetchedPhoto( movies: [Movie] ) {
-        self.movies = movies // Cache
-        var tempArray = [MovieCellViewModel]()
-        for m in movies {
-            tempArray.append( createCellViewModel(movie: m) )
-        }
-        self.cellViewModels = tempArray
-    }
-    
-    
+   
 }
 
-
-extension MovieViewModel {
-    
-    
-    
-    func didSelectedAt(indexPath:IndexPath){
-        let movie = self.movies[indexPath.row]
-       
-            self.isAllowSegue = true
-            self.selectedMovie = movie
-        
-        
-    }
-}
 
